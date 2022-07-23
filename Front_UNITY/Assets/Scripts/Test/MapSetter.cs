@@ -23,37 +23,10 @@ public class MapSetter : MonoBehaviour
 
     private void Start()
     {
-        for (int x = 0; x < 6; x++)
-        {
-
-            for (int y = 0; y < 12; y++)
-            {
-                if (y == 0)
-                {
-                    map.GetGrid().SetValue(x, y, converter.EnumToTile(MazeTile.TileTypes.Path));
-                    map.GetGrid().GetValue(x, y).CurrentColor = Color.Lerp(Color.blue, Color.white, 0.5f);
-                }
-                else if (y == 11)
-                {
-                    map.GetGrid().SetValue(x, y, converter.EnumToTile(MazeTile.TileTypes.Path));
-                    map.GetGrid().GetValue(x, y).CurrentColor = Color.Lerp(Color.red, Color.white, 0.5f);
-                }
-                else if (y == 2 && (x != 1 && x != 0 && x != 5))
-                {
-                    map.GetGrid().SetValue(x, y, converter.EnumToTile(MazeTile.TileTypes.Wall));
-                }
-                else if(y == 5)
-                {
-                    map.GetGrid().SetValue(x, y, converter.EnumToTile(MazeTile.TileTypes.Mud));
-                }
-                else if (y == 9 && (x != 0 && x != 4 && x != 5))
-                {
-                    map.GetGrid().SetValue(x, y, converter.EnumToTile(MazeTile.TileTypes.Wall));
-                }
-                else
-                    map.GetGrid().SetValue(x, y, converter.EnumToTile(MazeTile.TileTypes.Path));
-            }
-        }
+        var mazeManager = new MazeManager();
+        var http = gameObject.AddComponent<HttpRequestHelper>();
+        CoroutineWithData cd = new CoroutineWithData(this,http.GetMazeJsonUpr());
+        StartCoroutine(mazeManager.WaitForJson(cd, FileMode.Load));
 
 
         CreateBot();

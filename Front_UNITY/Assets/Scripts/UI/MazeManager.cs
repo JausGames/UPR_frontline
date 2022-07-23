@@ -138,7 +138,7 @@ public class MazeManager : MonoBehaviour
         CreateButtons(mapList, mode, autoSelectLast);
         yield return true;
     }
-    private IEnumerator WaitForJson(CoroutineWithData corout, FileMode mode)
+    public IEnumerator WaitForJson(CoroutineWithData corout, FileMode mode)
     {
         if (mode == FileMode.Load)
         {
