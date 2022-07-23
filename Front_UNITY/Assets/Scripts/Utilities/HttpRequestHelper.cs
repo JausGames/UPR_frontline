@@ -6,7 +6,7 @@ using System;
 
 public class HttpRequestHelper : MonoBehaviour
 {
-    const string API_URL = "http://mazelaravel.test/api/";
+    const string API_URL = "http://back_laravel.test/api/";
 
 
     public IEnumerator GetMazeList()
